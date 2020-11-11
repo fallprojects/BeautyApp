@@ -7,9 +7,11 @@
 <body>
 <table>
     <tr>
+    <td>Button</td>
     <th>Name</th>
     <th>Description</th>
     <th>Price</th>
+
     </tr>
     {% for service in services %}
     <tr>
@@ -17,6 +19,7 @@
     <td>{{ service.name }}</td>
     <td>{{ service.description }}</td>
     <td>{{ service.price }}</td>
+
     </tr>
     {% endfor %}
 </table>
