@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Page</title>
+</head>
+<body>
+<table>
+    <tr>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Date_created</td>
+    </tr>
+    {% for feedback in feedbacks %}
+    <tr>
+    <td>{{ feedback.name }}</td>
+    <td>{{ feedback.description }}</td>
+    <td>{{ feedback.date_created }}</td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+</body>
+</html>

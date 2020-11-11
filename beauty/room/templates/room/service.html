@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Page</title>
+</head>
+<body>
+<table>
+    <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    </tr>
+    {% for service in services %}
+    <tr>
+        <td><a href="{% url 'detail' service.id %}">Click</a></td>
+    <td>{{ service.name }}</td>
+    <td>{{ service.description }}</td>
+    <td>{{ service.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

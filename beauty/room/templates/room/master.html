@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Master Page</title>
+</head>
+<body>
+<table>
+    <tr>
+    <td>Name</td>
+    </tr>
+    {% for master in masters %}
+    <tr>
+    <td>{{ master.name }}</td>
+    <td>{{ master.description }}</td>
+    </tr>
+    {% endfor%}
+</table>
+
+</body>
+</html>
