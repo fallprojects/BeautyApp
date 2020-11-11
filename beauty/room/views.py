@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import *
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+
 
 def home_page(request):
     service = Service.objects.all()
@@ -9,6 +12,20 @@ def home_page(request):
     certificate = Certificate.objects.all()
     context = {'service':service,'feedback':feedback,'contact':contact,'master':master,'certificate':certificate}
     return render(request,'room/home.html',context)
+
+
+def customer_page(request, pk):
+    try:
+        customer = Customer.objects.get(id=pk)
+        orders = customer.order_set.all()
+        orders_count = orders.count()
+        filterset = OrderFilterSet(request.GET,queryset=orders)
+        orders = filterset.qs # Обращаемся к классу Model
+        context = {'customer':customer,'orders':orders,'orders_count':orders_count,'filterset':filterset}
+        return render(request,'room/customer.html',context)
+
+    except ObjectDoesNotExist:
+        return HttpResponse('Takogo net')
 
 
 def service_page(request):
@@ -44,6 +61,12 @@ def service_detail(request,pk):
     detail = Service.objects.get(id=pk)
     context = {'detail':detail}
     return render(request,'room/details.html',context)
+
+
+def master_detail(request,pk):
+    detail = Certificate.objects.get(id=pk)
+    context = {'detail':detail}
+    return render(request,'room/master_details.html',context)
 
 
 
