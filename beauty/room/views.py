@@ -58,14 +58,16 @@ def certificate_page(request):
 
 
 def service_detail(request,pk):
-    detail = Service.objects.get(id=pk)
-    context = {'detail':detail}
+    detail = Master.objects.get(id=pk)
+    services = detail.service_set.all()
+    context = {'detail':detail,'services':services}
     return render(request,'room/details.html',context)
 
 
 def master_detail(request,pk):
-    detail = Certificate.objects.get(id=pk)
-    context = {'detail':detail}
+    details = Master.objects.get(id=pk)
+    certification = details.certificate_set.all()
+    context = {'details':details,'certification':certification}
     return render(request,'room/master_details.html',context)
 
 
