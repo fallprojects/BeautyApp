@@ -7,14 +7,17 @@
 <body>
 <table>
     <tr>
+    <td>Button</td>
     <td>Name</td>
+    <td>Description</td>
     </tr>
     {% for master in masters %}
     <tr>
+        <td><a href="{% url 'master_details' master.id %}">Click</a></td>
     <td>{{ master.name }}</td>
     <td>{{ master.description }}</td>
     </tr>
-    {% endfor%}
+    {% endfor %}
 </table>
 
 </body>

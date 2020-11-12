@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Certifacate Page</title>
+    <title>Certificate Page</title>
 </head>
 <body>
 <table>
+    <tr>
     <td>Name</td>
     <td>Description</td>
+    </tr>
+    {% for certificate in certificates %}
+    <tr>
+    <td>{{ certificate.name }}</td>
+    <td>{{ certificate.description }}</td>
+    </tr>
+    {% endfor %}
 </table>
 
 </body>

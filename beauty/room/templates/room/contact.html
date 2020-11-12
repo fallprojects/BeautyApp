@@ -6,10 +6,19 @@
 </head>
 <body>
 <table>
+    <tr>
     <td>Name</td>
     <td>Phone</td>
     <td>Email</td>
     <td>Address</td>
+    </tr>
+    {% for contact in contacts %}
+    <td>{{ contact.name }}</td>
+    <td>{{ contact.phone }}</td>
+    <td>{{ contact.email }}</td>
+    <td>{{ contact.address }}</td>
+
+    {% endfor %}
 
 </table>
 
