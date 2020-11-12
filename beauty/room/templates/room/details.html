@@ -1,4 +1,5 @@
 {{ detail.name }}
-{{ detail.description }}
-{{ detail.price }}
 <img src="{{ detail.image.url }}" alt="Admin" class="rounded-circle" width="150">
+{% for service in services %}
+{{ service.name }}
+{% endfor %}
