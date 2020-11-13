@@ -12,9 +12,7 @@ urlpatterns = [
     path('certificate/',certificate_page,name='certificate'),
     path('service/<int:pk>/',service_detail,name='detail'),
     path('master/<int:pk>/',master_detail,name='master_details'),
-
-
-
+    path('register/',register,name='register'),
 
 
 ]
