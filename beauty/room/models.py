@@ -9,6 +9,9 @@ class Customer(models.Model):
     phone = models.CharField(max_length=200,null=True)
     email = models.CharField(max_length=200, null=True)
     address = models.CharField(max_length=200,null=True)
+    image = models.ImageField(null=True, blank=True, default='')
+
+
 
     def __str__(self):
         return self.full_name
@@ -27,8 +30,8 @@ class Service(models.Model):
         return self.name
 
 class Feedback(models.Model):
-    name = models.CharField(max_length=100,null=True)
     full_name = models.CharField(max_length=100,null=True)
+    title = models.CharField(max_length=100,null=True)
     description = models.CharField(max_length=100,null=True)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
 
@@ -51,7 +54,6 @@ class Contact(models.Model):
 class Master(models.Model):
     name = models.CharField(max_length=100,null=True)
     description = models.CharField(max_length=100,null=True)
-    certification = models.ManyToManyField('Certificate',null=True)
     image = models.ImageField(null=True,blank=True,default='')
 
     def __str__(self):
@@ -62,6 +64,7 @@ class Certificate(models.Model):
     name = models.CharField(max_length=100,null=True)
     description = models.CharField(max_length=100,null=True)
     image = models.ImageField(null=True,blank=True,default='')
+    master = models.ManyToManyField(Master, null=True)
 
     def __str__(self):
         return self.name

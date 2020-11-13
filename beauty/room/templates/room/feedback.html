@@ -7,19 +7,28 @@
 <body>
 <table>
     <tr>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Date_created</td>
+        <td>Full Name</td>
+        <td>Title</td>
+        <td>Description</td>
     </tr>
     {% for feedback in feedbacks %}
     <tr>
-    <td>{{ feedback.name }}</td>
+    <td>{{ feedback.full_name }}</td>
+    <td>{{ feedback.title }}</td>
     <td>{{ feedback.description }}</td>
-    <td>{{ feedback.date_created }}</td>
     </tr>
 
     {% endfor %}
+
 </table>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="submit">
+    </form>
+
+
+
 
 </body>
 </html>
