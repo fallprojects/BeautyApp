@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.contrib.auth.models import Group
+from django.shortcuts import render, redirect
+from .forms import FeedbackForm
+from django.contrib.auth.forms import UserCreationForm
 from .models import *
+from django.contrib import messages
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -15,17 +19,9 @@ def home_page(request):
 
 
 def customer_page(request, pk):
-    try:
-        customer = Customer.objects.get(id=pk)
-        orders = customer.order_set.all()
-        orders_count = orders.count()
-        filterset = OrderFilterSet(request.GET,queryset=orders)
-        orders = filterset.qs # Обращаемся к классу Model
-        context = {'customer':customer,'orders':orders,'orders_count':orders_count,'filterset':filterset}
-        return render(request,'room/customer.html',context)
-
-    except ObjectDoesNotExist:
-        return HttpResponse('Takogo net')
+    customer = Customer.objects.get(id=pk)
+    context = {'customer':customer}
+    return render(request,'room/customer.html',context)
 
 
 def service_page(request):
@@ -36,7 +32,13 @@ def service_page(request):
 
 def feedback_page(request):
     feedbacks = Feedback.objects.all()
-    context = {'feedbacks':feedbacks}
+    form = FeedbackForm()
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'feedbacks':feedbacks,'form':form}
     return render(request,'room/feedback.html',context)
 
 
@@ -72,4 +74,14 @@ def master_detail(request,pk):
 
 
 
+def register(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('home')
+    context = {'form':form}
+    return render(request,'room/register.html',context)
 
